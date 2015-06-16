@@ -1,0 +1,45 @@
+* Things to store in fake cursor
+** pointer
+i.e. the position of the cursor: =(point)=
+** mark
+Actually, I am thinking that this is not needed for evil mode(see blow
+for selection)
+** state
+i.e. current state of the cursor: normal/insert/visual.. etc.
+** selection
+According to function =evil-visual-store= in file =evil-commands.el=,
+a visual selection contains the following information:
+
+1. =evil-visual-direction=, the direction of Visual selection. 
+2. =evil-visual-selection=, i.e. the type of selection
+3. =evil-visual-mark=, the position of mark in Visual state, a marker.
+4. =evil-visual-point=, the position of point in Visual state, a marker.
+
+** Others
+We can check =evil-vars.el= to check those vars that are related to
+local state.
+
+- =evil-state= :: the current evil state
+
+visual mode:
+
+- =evil-visual-beginning= :: the beginning of the visual selection, a marker.
+- =evil-visual-end= :: the end of the visual selection, a marker.
+- =evil-visual-point= :: the position of point in visual state, a
+     marker.
+- =evil-visual-mark= :: the position of mark in visual state, a marker.
+- =evil-visual-selection= :: the kind of visual selection (selection type).
+- =evil-visual-direction= :: wheter point follows mark in visual state.
+
+and visual overlays if needed.
+
+** Concerns
+1. is =evil-repeat-ring= needed to be stored locally?
+
+* Manipulation
+Use =evil-visual-refresh= to update visual states.
+
+* Problems
+1. use =this-command-keys= fail to catch the macro register, such as
+   "@q" and "q" is not catched.
+2. Don't know when an operation is ended.
