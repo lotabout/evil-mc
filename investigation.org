@@ -33,6 +33,8 @@ visual mode:
 
 and visual overlays if needed.
 
+=evil-this-register= should be cached as well.
+
 ** Concerns
 1. is =evil-repeat-ring= needed to be stored locally?
 
@@ -43,3 +45,17 @@ Use =evil-visual-refresh= to update visual states.
 1. use =this-command-keys= fail to catch the macro register, such as
    "@q" and "q" is not catched.
 2. Don't know when an operation is ended.
+
+* Solutions (intended)
+Change the way of post command to execute command for every fake
+cursor. However, we need(intend) to utilize the repeat info, thus we
+cannot directly add a hook to post-command-hook, because the order of
+hooks is undefined.
+
+- Use hook or advice to change the behavior of =evil-repeat-post-hook=
+  to do that.
+
+Also the repeat information is state specific, so we should deel with
+that.
+
+- A way to retrieve keys strokes in insert state.
